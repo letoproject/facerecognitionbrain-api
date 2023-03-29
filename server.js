@@ -24,7 +24,13 @@ app.use(cors({
 	})
        );
 
-app.get('/', (req, res) => { res.send('it is working!') })
+app.get('/', (req, res) => {
+	res.header('Access-Control-Allow-Origin', '*');
+
+  // Set any other headers you want to include
+  	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+ 	res.header('Access-Control-Allow-Headers', 'Content-Type');
+	res.send('it is working!') })
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) })
